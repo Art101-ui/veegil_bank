@@ -32,81 +32,86 @@ class SignUpPage extends StatelessWidget {
               right: Dimensions.width10,
               top: Dimensions.height20,
               bottom: Dimensions.height20),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Align(
-                  child: BigText(
-                text: 'Veegil Bank',
-                color: AppColors.mainColor,
-                size: Dimensions.font30 - 2,
-                fontWeight: FontWeight.w400,
-              )),
-              SizedBox(
-                height: Dimensions.height5 * 11,
-              ),
-              TextInputs(
-                controller: signupController.phoneController,
-                textString: 'Phone Number',
-              ),
-              SizedBox(
-                height: Dimensions.height15,
-              ),
-              TextInputPassword(
-                controller: signupController.passwordController,
-                textString: 'Password',
-              ),
-              SizedBox(
-                height: Dimensions.height20,
-              ),
-              GestureDetector(
-                  onTap: () {
-                    signupController.register();
-                  },
-                  child: Container(
-                      padding: EdgeInsets.only(
-                          top: Dimensions.height20,
-                          bottom: Dimensions.height20),
-                      width: double.infinity,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.all(
-                            Radius.circular(Dimensions.radius26)),
+          child: Center(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                SizedBox(height: Dimensions.height45),
+                Align(
+                    child: BigText(
+                  text: 'Veegil Bank',
+                  color: AppColors.mainColor,
+                  size: Dimensions.font30 - 2,
+                  fontWeight: FontWeight.w400,
+                )),
+                SizedBox(
+                  height: Dimensions.height5 * 11,
+                ),
+                TextInputs(
+                  controller: signupController.phoneController,
+                  textString: 'Phone Number',
+                ),
+                SizedBox(
+                  height: Dimensions.height15,
+                ),
+                TextInputPassword(
+                  controller: signupController.passwordController,
+                  textString: 'Password',
+                ),
+                SizedBox(
+                  height: Dimensions.height20,
+                ),
+                GestureDetector(
+                    onTap: () {
+                      signupController.register();
+                    },
+                    child: Container(
+                        padding: EdgeInsets.only(
+                            top: Dimensions.height20,
+                            bottom: Dimensions.height20),
+                        width: double.infinity,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.all(
+                              Radius.circular(Dimensions.radius26)),
+                          color: AppColors.mainColor,
+                        ),
+                        child: Obx(() => Align(
+                              child: signupController.isLoading.value
+                                  ? const CupertinoActivityIndicator(
+                                      color: Colors.white,
+                                      radius: 9.0,
+                                    )
+                                  : BigText(
+                                      text: 'Sign up',
+                                      size: Dimensions.font26,
+                                      color: Colors.white,
+                                    ),
+                            )))),
+                SizedBox(height: Dimensions.height20),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    BigText(
+                      text: "Already have an account ? ",
+                      size: Dimensions.font16,
+                    ),
+                    GestureDetector(
+                      onTap: () {
+                        Get.to(() => LoginPage());
+                        signupController.phoneController.clear();
+                        signupController.passwordController.clear();
+                      },
+                      child: BigText(
+                        text: "Sign in",
+                        size: Dimensions.font16,
                         color: AppColors.mainColor,
                       ),
-                      child: Obx(() => Align(
-                            child: signupController.isLoading.value
-                                ? const CupertinoActivityIndicator(
-                                    color: Colors.white,
-                                    radius: 9.0,
-                                  )
-                                : BigText(
-                                    text: 'Sign up',
-                                    size: Dimensions.font26,
-                                    color: Colors.white,
-                                  ),
-                          )))),
-              SizedBox(height: Dimensions.height20),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  BigText(
-                    text: "Already have an account ? ",
-                    size: Dimensions.font16,
-                  ),
-                  GestureDetector(
-                    onTap: () {
-                      Get.to(() => LoginPage());
-                    },
-                    child: BigText(
-                      text: "Sign in",
-                      size: Dimensions.font16,
-                      color: AppColors.mainColor,
                     ),
-                  ),
-                ],
-              )
-            ],
+                  ],
+                )
+              ],
+            ),
           ),
         ),
       ),

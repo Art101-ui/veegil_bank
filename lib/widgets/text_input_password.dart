@@ -20,7 +20,7 @@ class _TextInputPasswordState extends State<TextInputPassword> {
   @override
   Widget build(BuildContext context) {
     return TextField(
-      controller:widget.controller,
+      controller: widget.controller,
       style: TextStyle(color: Color(0xFF000000)),
       cursorColor: Color.fromARGB(255, 49, 27, 146),
       keyboardType: TextInputType.text,

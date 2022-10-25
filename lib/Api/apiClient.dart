@@ -32,7 +32,6 @@ class ApiClient {
         return response;
       }
     } catch (e) {
-     
       throw e.toString();
     }
   }

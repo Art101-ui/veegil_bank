@@ -5,13 +5,10 @@ import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:get/get.dart';
 import 'package:veegil_bank/screens/Credit/credit_controller.dart';
-import 'package:veegil_bank/screens/homescreen/homescreen.dart';
 import 'package:veegil_bank/utilis/colors.dart';
 import 'package:veegil_bank/utilis/dimensions.dart';
 import 'package:veegil_bank/widgets/big_text.dart';
-import 'package:veegil_bank/widgets/small_text.dart';
 import 'package:veegil_bank/widgets/text_input.dart';
-import 'package:veegil_bank/widgets/text_input_password.dart';
 
 class CreditPage extends StatelessWidget {
   CreditPage({Key? key}) : super(key: key);

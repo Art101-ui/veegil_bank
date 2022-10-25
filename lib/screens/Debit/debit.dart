@@ -69,7 +69,7 @@ class DebitPage extends StatelessWidget {
                 style: TextStyle(color: Color(0xFF000000)),
                 cursorColor: Color.fromARGB(255, 49, 27, 146),
                 keyboardType: TextInputType.number,
-                decoration: InputDecoration(
+                decoration: const InputDecoration(
                   hintText: 'Amount',
                   hintStyle: TextStyle(
                       color: Color(0xFF9b9b9b),

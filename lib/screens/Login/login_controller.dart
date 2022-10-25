@@ -8,6 +8,7 @@ import 'package:veegil_bank/screens/HomeScreen/homeScreen.dart';
 
 class LoginController extends GetxController {
   final isLoading = false.obs;
+
   TextEditingController phoneController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
 
@@ -25,13 +26,14 @@ class LoginController extends GetxController {
       final data = jsonDecode(response.body) as Map<String, dynamic>;
       if (data['status'] == 'success') {
         Get.to(() => HomeScreen());
+
+        passwordController.clear();
       }
     } catch (e) {
-      print(e.toString());
+      debugPrint(e.toString());
       Get.snackbar('Error', 'Invalid credentials');
     } finally {
       isLoading.value = false;
     }
-    print(isLoading.value);
   }
 }

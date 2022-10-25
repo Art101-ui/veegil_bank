@@ -3,9 +3,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:veegil_bank/Api/apiClient.dart';
-import 'package:veegil_bank/screens/HomeScreen/homeScreen_model.dart';
-import 'package:veegil_bank/screens/SignUp/sign_up_model.dart';
-import 'package:veegil_bank/screens/HomeScreen/homeScreen.dart';
+
 import 'package:veegil_bank/screens/Transactions/transactions_model.dart';
 
 class TransactionsController extends GetxController {
@@ -16,8 +14,6 @@ class TransactionsController extends GetxController {
     getTransactions();
     super.onInit();
   }
-
-  
 
   Future<List<TransactionsModel>?> getTransactions() async {
     isLoading.value = true;
@@ -31,20 +27,16 @@ class TransactionsController extends GetxController {
       List<TransactionsModel> transactions = [];
 
       for (var d in data['data']) {
-        TransactionsModel transaction = TransactionsModel(
-          d['type'],
-          d['amount'],
-          d['phoneNumber'],
-        );
+        TransactionsModel transaction = TransactionsModel(d['type'],
+            d['amount'], d['phoneNumber'], DateTime.parse(d['created']));
 
         transactions.add(transaction);
       }
 
-      print(transactions.length);
       return transactions.reversed.toList();
     } catch (e) {
       Get.snackbar('Error', e.toString());
-      print(e.toString());
+      debugPrint(e.toString());
     } finally {
       isLoading.value = false;
     }

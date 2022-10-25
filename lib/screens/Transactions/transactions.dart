@@ -1,18 +1,15 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/foundation/key.dart';
-import 'package:flutter/src/widgets/framework.dart';
+
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
-import 'package:veegil_bank/screens/HomeScreen/homeScreen_controller.dart';
+
 import 'package:veegil_bank/screens/Transactions/transactions_controller.dart';
 import 'package:veegil_bank/screens/Transactions/transactions_model.dart';
 import 'package:veegil_bank/utilis/colors.dart';
 import 'package:veegil_bank/utilis/dimensions.dart';
 import 'package:veegil_bank/widgets/big_text.dart';
 import 'package:veegil_bank/widgets/small_text.dart';
-import 'package:veegil_bank/widgets/text_input.dart';
-import 'package:veegil_bank/widgets/text_input_password.dart';
 
 class TransactionsPage extends StatefulWidget {
   const TransactionsPage({Key? key}) : super(key: key);
@@ -47,8 +44,8 @@ class _TransactionsPageState extends State<TransactionsPage> {
             Container(
               padding: EdgeInsets.only(bottom: Dimensions.height5),
               decoration: const BoxDecoration(
-                border: Border(
-                    bottom: BorderSide(color: Colors.grey, width: 0.5)),
+                border:
+                    Border(bottom: BorderSide(color: Colors.grey, width: 0.5)),
               ),
               child: Align(
                 alignment: Alignment.topLeft,
@@ -69,7 +66,6 @@ class _TransactionsPageState extends State<TransactionsPage> {
                     future: transactions.getTransactions(),
                     builder: (BuildContext context, AsyncSnapshot snapshot) {
                       if (snapshot.data == null) {
-                        print(snapshot.data);
                         return const Center(
                           child: CupertinoActivityIndicator(
                             radius: 9,
@@ -124,7 +120,27 @@ class _TransactionsPageState extends State<TransactionsPage> {
                                               SizedBox(
                                                 height: Dimensions.height5,
                                               ),
-                                              SmallText(text: '3 hours ago'),
+                                              Row(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment
+                                                        .spaceBetween,
+                                                children: [
+                                                  SmallText(
+                                                      text: ((snapshot
+                                                                  .data[index]
+                                                                  .created)
+                                                              .toString()
+                                                              .split('.')[0])
+                                                          .split(' ')[0]),
+                                                  SmallText(
+                                                      text: ((snapshot
+                                                                  .data[index]
+                                                                  .created)
+                                                              .toString()
+                                                              .split('.')[0])
+                                                          .split(' ')[1]),
+                                                ],
+                                              ),
                                             ],
                                           ),
                                         ),

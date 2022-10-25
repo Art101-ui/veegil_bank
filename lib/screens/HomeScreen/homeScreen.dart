@@ -6,13 +6,11 @@ import 'package:veegil_bank/screens/Credit/credit.dart';
 import 'package:veegil_bank/screens/Debit/debit.dart';
 import 'package:veegil_bank/screens/HomeScreen/homeScreen_controller.dart';
 import 'package:veegil_bank/screens/HomeScreen/homeScreen_model.dart';
+import 'package:veegil_bank/screens/Login/login_controller.dart';
 import 'package:veegil_bank/screens/Transactions/transactions.dart';
-
 import 'package:veegil_bank/utilis/colors.dart';
 import 'package:veegil_bank/utilis/dimensions.dart';
-import 'package:veegil_bank/widgets/app_column.dart';
 import 'package:veegil_bank/widgets/big_text.dart';
-import 'package:veegil_bank/widgets/expanded_text_widget.dart';
 import 'package:veegil_bank/widgets/icon-text.dart';
 import 'package:veegil_bank/widgets/row_icontext.dart';
 import 'package:veegil_bank/widgets/small_text.dart';
@@ -26,6 +24,7 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   HomeScreenController homeScreen = Get.put(HomeScreenController());
+  LoginController login = Get.put(LoginController());
   NumberFormat myFormat = NumberFormat.decimalPattern('en_us');
   @override
   Widget build(BuildContext context) {
@@ -63,12 +62,22 @@ class _HomeScreenState extends State<HomeScreen> {
                       SizedBox(
                         width: Dimensions.width10,
                       ),
-                      BigText(
-                        text: '4,789',
-                        fontWeight: FontWeight.w700,
-                        size: Dimensions.font60,
-                        color: Color(0xffFC8177),
-                      ),
+                      FutureBuilder(
+                          future: homeScreen.getMoney(),
+                          builder: (context, AsyncSnapshot snapshot) {
+                            return homeScreen.isLoading.value
+                                ? BigText(
+                                    text: '-- --',
+                                    fontWeight: FontWeight.w700,
+                                    size: Dimensions.font60,
+                                    color: const Color(0xffFC8177))
+                                : BigText(
+                                    text: myFormat.format(snapshot.data),
+                                    fontWeight: FontWeight.w700,
+                                    size: Dimensions.font60,
+                                    color: Color(0xffFC8177),
+                                  );
+                          }),
                     ],
                   )),
               Positioned(
@@ -172,10 +181,22 @@ class _HomeScreenState extends State<HomeScreen> {
                         onTap: () {
                           Get.to(() => const TransactionsPage());
                         },
-                        child: BigText(
-                          text: 'See all',
-                          fontWeight: FontWeight.w700,
-                          size: Dimensions.font16 * 1.2,
+                        child: Container(
+                          decoration: BoxDecoration(
+                              borderRadius:
+                                  BorderRadius.circular(Dimensions.radius20),
+                              color: AppColors.mainColor),
+                          padding: EdgeInsets.only(
+                              top: Dimensions.height5,
+                              bottom: Dimensions.height5,
+                              right: Dimensions.width10,
+                              left: Dimensions.width10),
+                          child: BigText(
+                            text: 'See all',
+                            color: Colors.white,
+                            fontWeight: FontWeight.w700,
+                            size: Dimensions.font16 * 1.2,
+                          ),
                         ),
                       ),
                     ],
@@ -246,8 +267,31 @@ class _HomeScreenState extends State<HomeScreen> {
                                                       height:
                                                           Dimensions.height5,
                                                     ),
-                                                    SmallText(
-                                                        text: '3 hours ago'),
+                                                    Row(
+                                                      mainAxisAlignment:
+                                                          MainAxisAlignment
+                                                              .spaceBetween,
+                                                      children: [
+                                                        SmallText(
+                                                            text: ((snapshot
+                                                                        .data[
+                                                                            index]
+                                                                        .created)
+                                                                    .toString()
+                                                                    .split(
+                                                                        '.')[0])
+                                                                .split(' ')[0]),
+                                                        SmallText(
+                                                            text: ((snapshot
+                                                                        .data[
+                                                                            index]
+                                                                        .created)
+                                                                    .toString()
+                                                                    .split(
+                                                                        '.')[0])
+                                                                .split(' ')[1]),
+                                                      ],
+                                                    ),
                                                   ],
                                                 ),
                                               ),

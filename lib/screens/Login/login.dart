@@ -32,90 +32,87 @@ class LoginPage extends StatelessWidget {
               right: Dimensions.width10,
               top: Dimensions.height20,
               bottom: Dimensions.height20),
-          child: Container(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Align(
-                  child: BigText(
-                    fontWeight: FontWeight.w400,
-                    text: 'Login',
-                    color: AppColors.mainColor,
-                    size: Dimensions.font26,
-                  ),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Align(
+                child: BigText(
+                  fontWeight: FontWeight.w400,
+                  text: 'Login',
+                  color: AppColors.mainColor,
+                  size: Dimensions.font26,
                 ),
-                SizedBox(
-                  height: Dimensions.height40,
-                ),
-                TextInputs(
-                  controller: loginController.phoneController,
-                  textString: 'Phone Number',
-                ),
-                SizedBox(
-                  height: Dimensions.height15,
-                ),
-                TextInputPassword(
-                  controller: loginController.passwordController,
-                  textString: 'Password',
-                ),
-                SizedBox(
-                  height: Dimensions.height20,
-                ),
-                GestureDetector(
-                    onTap: () {
-                      loginController.login();
-                    },
-                    child: Container(
-                        padding: EdgeInsets.only(
-                            top: Dimensions.height20,
-                            bottom: Dimensions.height20),
-                        width: double.infinity,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.all(
-                              Radius.circular(Dimensions.radius26)),
-                          color: AppColors.mainColor,
-                        ),
-                        child: Obx(
-                           () {
-                            return Align(
-                              child: loginController.isLoading.value
-                                  ? CupertinoActivityIndicator(
-                                      color: Colors.white,
-                                      radius: 9.0,
-                                    )
-                                  : BigText(
-                                      text: 'Sign in',
-                                      size: Dimensions.font26,
-                                      color: Colors.white,
-                                    ),
-                            );
-                          }
-                        ))),
-                SizedBox(
-                  height: Dimensions.height15,
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    BigText(
-                      text: "Don't have an account ? ",
-                      size: Dimensions.font16,
-                    ),
-                    GestureDetector(
-                      onTap: () {
-                        Get.to(() => SignUpPage());
-                      },
-                      child: BigText(
-                        text: "Sign up ",
-                        size: Dimensions.font16,
+              ),
+              SizedBox(
+                height: Dimensions.height40,
+              ),
+              TextInputs(
+                controller: loginController.phoneController,
+                textString: 'Phone Number',
+              ),
+              SizedBox(
+                height: Dimensions.height15,
+              ),
+              TextInputPassword(
+                controller: loginController.passwordController,
+                textString: 'Password',
+              ),
+              SizedBox(
+                height: Dimensions.height20,
+              ),
+              GestureDetector(
+                  onTap: () {
+                    loginController.login();
+                  },
+                  child: Container(
+                      padding: EdgeInsets.only(
+                          top: Dimensions.height20,
+                          bottom: Dimensions.height20),
+                      width: double.infinity,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.all(
+                            Radius.circular(Dimensions.radius26)),
                         color: AppColors.mainColor,
                       ),
+                      child: Obx(() {
+                        return Align(
+                          child: loginController.isLoading.value
+                              ? const CupertinoActivityIndicator(
+                                  color: Colors.white,
+                                  radius: 9.0,
+                                )
+                              : BigText(
+                                  text: 'Sign in',
+                                  size: Dimensions.font26,
+                                  color: Colors.white,
+                                ),
+                        );
+                      }))),
+              SizedBox(
+                height: Dimensions.height15,
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  BigText(
+                    text: "Don't have an account ? ",
+                    size: Dimensions.font16,
+                  ),
+                  GestureDetector(
+                    onTap: () {
+                      Get.to(() => SignUpPage());
+                      loginController.phoneController.clear();
+                    },
+                    child: BigText(
+                      text: "Sign up ",
+                      size: Dimensions.font16,
+                      color: AppColors.mainColor,
                     ),
-                  ],
-                )
-              ],
-            ),
+                  ),
+                ],
+              )
+            ],
           ),
         ),
       ),
