@@ -24,6 +24,10 @@ class CreditController extends GetxController {
       );
 
       final data = jsonDecode(response.body) as Map<String, dynamic>;
+
+      Get.snackbar(
+                        'Success', "Go to homescreen and refresh to view changes",
+                        colorText: Colors.green);
     } catch (e) {
       debugPrint(e.toString());
       Get.snackbar('Error', 'Invalid credentials');

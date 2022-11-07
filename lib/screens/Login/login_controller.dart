@@ -28,10 +28,12 @@ class LoginController extends GetxController {
         Get.to(() => HomeScreen());
 
         passwordController.clear();
+      } else if (data['status'] == 'error') {
+        Get.snackbar('Error', data['message'], colorText: Colors.red);
       }
     } catch (e) {
       debugPrint(e.toString());
-      Get.snackbar('Error', 'Invalid credentials');
+      Get.snackbar('Error', e.toString());
     } finally {
       isLoading.value = false;
     }

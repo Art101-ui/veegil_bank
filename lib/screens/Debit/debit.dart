@@ -83,6 +83,9 @@ class DebitPage extends StatelessWidget {
               GestureDetector(
                   onTap: () {
                     debitController.withdraw();
+                    debitController.amountController.clear();
+                    debitController.phoneController.clear();
+                    
                   },
                   child: Container(
                       padding: EdgeInsets.only(

@@ -5,6 +5,7 @@ import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:get/get.dart';
 import 'package:veegil_bank/screens/Credit/credit_controller.dart';
+import 'package:veegil_bank/screens/HomeScreen/homeScreen.dart';
 import 'package:veegil_bank/utilis/colors.dart';
 import 'package:veegil_bank/utilis/dimensions.dart';
 import 'package:veegil_bank/widgets/big_text.dart';
@@ -80,6 +81,9 @@ class CreditPage extends StatelessWidget {
               GestureDetector(
                   onTap: () {
                     creditController.transfer();
+                    creditController.amountController.clear();
+                    creditController.phoneController.clear();
+                    
                   },
                   child: Container(
                       padding: EdgeInsets.only(

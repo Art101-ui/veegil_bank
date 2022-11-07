@@ -30,7 +30,7 @@ class SignUpController extends GetxController {
         Get.snackbar('Error', data['message'], colorText: Colors.red);
       }
     } catch (e) {
-      Get.snackbar('Error', 'Invalid credentials');
+      Get.snackbar('Error', e.toString());
     } finally {
       isLoading.value = false;
     }
