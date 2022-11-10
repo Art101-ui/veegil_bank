@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+
 import 'package:veegil_bank/screens/Login/login.dart';
 import 'package:veegil_bank/screens/SignUp/sign_up.dart';
 

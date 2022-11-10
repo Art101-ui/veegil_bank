@@ -26,7 +26,7 @@ class DebitController extends GetxController {
       final data = jsonDecode(response.body) as Map<String, dynamic>;
 
       Get.snackbar(
-                        'Success', "Go to homescreen and refresh to view changes",
+                        'Success', "Go to homescreen and refresh icon to view changes",
                         colorText: Colors.green);
     } catch (e) {
       debugPrint(e.toString());

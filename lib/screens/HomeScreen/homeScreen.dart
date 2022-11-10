@@ -139,6 +139,41 @@ class _HomeScreenState extends State<HomeScreen> {
               ],
             ),
           ),
+          Center(
+            child: Obx(() => GestureDetector(
+                  onTap: () {
+                    setState(() {
+                      homeScreen.getTransactions();
+                    });
+                  },
+                  child: Container(
+                    decoration: BoxDecoration(
+                        borderRadius:
+                            BorderRadius.circular(Dimensions.radius20),
+                        color: AppColors.mainColor),
+                    margin: EdgeInsets.only(
+                      top: Dimensions.height5,
+                      bottom: Dimensions.height5,
+                    ),
+                    padding: EdgeInsets.only(
+                        top: Dimensions.height5,
+                        bottom: Dimensions.height5,
+                        right: Dimensions.width10,
+                        left: Dimensions.width10),
+                    child: homeScreen.isLoading.value
+                        ? const Icon(
+                            Icons.currency_exchange_outlined,
+                            color: Colors.white,
+                          )
+                        : BigText(
+                            text: 'Refresh',
+                            color: Colors.white,
+                            fontWeight: FontWeight.w700,
+                            size: Dimensions.font16 * 1.2,
+                          ),
+                  ),
+                )),
+          ),
           SizedBox(
             height: Dimensions.height15,
           ),
@@ -164,19 +199,10 @@ class _HomeScreenState extends State<HomeScreen> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Obx(() => GestureDetector(
-                            onTap: () => {
-                              setState(() {
-                                homeScreen.getTransactions();
-                              })
-                            },
-                            child: RowIconTextWidget(
-                                icon: homeScreen.isLoading.value
-                                    ? Icons.currency_exchange_outlined
-                                    : Icons.refresh_rounded,
-                                iconColor: AppColors.mainColor,
-                                text: 'Recent Transactions'),
-                          )),
+                      RowIconTextWidget(
+                          icon: Icons.currency_exchange_outlined,
+                          iconColor: AppColors.mainColor,
+                          text: 'Recent Transactions'),
                       GestureDetector(
                         onTap: () {
                           Get.to(() => const TransactionsPage());

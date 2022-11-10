@@ -62,7 +62,7 @@ class _TransactionsPageState extends State<TransactionsPage> {
                 padding: EdgeInsets.only(
                   bottom: Dimensions.height30,
                 ),
-                child: FutureBuilder<List<TransactionsModel>?>(
+                child: FutureBuilder<List<TransactionsModel>?> (
                     future: transactions.getTransactions(),
                     builder: (BuildContext context, AsyncSnapshot snapshot) {
                       if (snapshot.data == null) {
@@ -74,7 +74,8 @@ class _TransactionsPageState extends State<TransactionsPage> {
                         );
                       } else {
                         return ListView.builder(
-                            itemCount: (((((snapshot.data.length +
+                            itemCount:
+                             (((((snapshot.data.length +
                                                     (snapshot.data.length +
                                                         1)) +
                                                 9) /
@@ -82,6 +83,9 @@ class _TransactionsPageState extends State<TransactionsPage> {
                                         snapshot.data.length) *
                                     5)
                                 .toInt(),
+                               
+                            
+
                             itemBuilder: ((context, index) {
                               return Column(
                                 children: [
